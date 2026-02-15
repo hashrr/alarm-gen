@@ -1,0 +1,119 @@
+{
+  "version": "0",
+  "id": "a52cdf7c-648a-ee7f-a189-7d470ad5a9a5",
+  "detail-type": "AWS API Call via CloudTrail",
+  "source": "aws.ec2",
+  "account": "123456789012",
+  "time": "2026-02-15T14:01:07Z",
+  "region": "ap-south-1",
+  "resources": [],
+  "detail": {
+    "eventVersion": "1.11",
+    "userIdentity": {
+      "type": "AssumedRole",
+      "principalId": "AROAXXXXXSW7ELIQU7I4I:dummy-role",
+      "arn": "arn:aws:sts::123456789012:assumed-role/dummy-primary/dummy-role",
+      "accountId": "123456789012",
+      "accessKeyId": "ASIAVCYNLSW7ENOIUXKN",
+      "sessionContext": {
+        "sessionIssuer": {
+          "type": "Role",
+          "principalId": "AROAXXXXXSW7ELIQU7I4I",
+          "arn": "arn:aws:iam::123456789012:role/dummy-primary",
+          "accountId": "123456789012",
+          "userName": "dummy-primary"
+        },
+        "attributes": {
+          "creationDate": "2026-02-15T06:06:02Z",
+          "mfaAuthenticated": "false"
+        }
+      }
+    },
+    "eventTime": "2026-02-15T14:01:07Z",
+    "eventSource": "ec2.amazonaws.com",
+    "eventName": "RunInstances",
+    "awsRegion": "ap-south-1",
+    "sourceIPAddress": "[IP_ADDRESS]",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "requestParameters": {
+      "instancesSet": {
+        "items": [
+          {
+            "imageId": "ami-0317b0f0a0144b137",
+            "minCount": 1,
+            "maxCount": 1
+          }
+        ]
+      },
+      "instanceType": "t3.micro",
+      "blockDeviceMapping": {},
+      "monitoring": {
+        "enabled": false
+      },
+      "disableApiTermination": false,
+      "disableApiStop": false,
+      "clientToken": "ac5a92dd-0ced-4265-bbb4-0c08549cd03b",
+      "tagSpecificationSet": {
+        "items": [
+          {
+            "resourceType": "instance",
+            "tags": [
+              {
+                "key": "Name",
+                "value": "alarm1"
+              }
+            ]
+          }
+        ]
+      },
+      "responseElements": {
+        "requestId": "ec18c72c-827c-4892-91d1-6bee424e7fa8",
+        "reservationId": "r-00ec63b240699c678",
+        "ownerId": "123456789012",
+        "groupSet": {},
+        "instancesSet": {
+          "items": [
+            {
+              "instanceId": "i-0b2exx280xxxad2dd",
+              "imageId": "ami-0317b0f0a0144b137",
+              "bootMode": "uefi-preferred",
+              "currentInstanceBootMode": "uefi",
+              "instanceState": {
+                "code": 0,
+                "name": "pending"
+              },
+              "privateDnsName": "ip-10-0-0-54.ap-south-1.compute.internal",
+              "operator": {
+                "managed": false
+              },
+              "amiLaunchIndex": 0,
+              "productCodes": {},
+              "instanceType": "t3.micro",
+              "launchTime": 1771164067000
+            }
+          ]
+        }
+      },
+      "requestID": "ec18c72c-827c-4892-91d1-6bee424e7fa8",
+      "eventID": "730ab766-0e4a-4635-9786-a5c76f01e7bf",
+      "readOnly": false,
+      "resources": [
+        {
+          "accountId": "123456789012",
+          "type": "AWS::EC2::Instance",
+          "ARN": "arn:aws:ec2:ap-south-1:123456789012:instance/i-0b2exx280xxxad2dd"
+        }
+      ],
+      "eventType": "AwsApiCall",
+      "managementEvent": true,
+      "recipientAccountId": "123456789012",
+      "eventCategory": "Management",
+      "tlsDetails": {
+        "tlsVersion": "TLSv1.3",
+        "cipherSuite": "TLS_AES_128_GCM_SHA256",
+        "clientProvidedHostHeader": "ec2.ap-south-1.amazonaws.com"
+      },
+      "sessionCredentialFromConsole": "true"
+    }
+  }
+}
