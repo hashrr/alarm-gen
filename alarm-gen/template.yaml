@@ -7,15 +7,18 @@ Description: >
 
 Globals:
   Function:
-    Timeout: 3
+    Timeout: 30
 
 Resources:
-  HelloWorldFunction:
+  AlarmGenFunction:
     Type: AWS::Serverless::Function 
     Properties:
-      CodeUri: hello_world/
+      CodeUri: alarm_gen/
       Handler: app.lambda_handler
       Runtime: python3.12
+      MemorySize: 128
+      Policies:
+        - EC2DescribePolicy: {}
       Architectures:
         - arm64
       Events:
@@ -26,7 +29,8 @@ Resources:
               source:
                 - aws.ec2
               detail-type:
-                - AWSAPICallviaCloudTrail
+                # only works when this parameter is set to the one below
+                - AWS API Call via CloudTrail
               detail:
                 eventSource:
                   - ec2.amazonaws.com
