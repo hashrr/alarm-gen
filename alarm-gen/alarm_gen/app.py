@@ -1,22 +1,44 @@
 import json
-import boto3
 
-ec2_client = boto3.client("ec2")
+
+def fetch_instance_details(eb_event) -> list:
+    """Parses the EventBridge event to get the instance details"""
+    instances = []
+    event_details = eb_event.get("detail", {})
+    if not event_details:
+        return instances
+
+    try:
+        instances = (
+            event_details.get("responseElements", {})
+            .get("instancesSet", {})
+            .get("items", [])
+        )
+        return instances
+    except Exception as e:
+        print(e)
+        return []
 
 
 def lambda_handler(event, context):
-    instance_ids = []
-    try:
-        # this is based on the event sent by EventBridge
-        # TODO: better to create a separate function to fetch the instance ID
+    return_msg = {}
+    instances = fetch_instance_details(event)
+    if not instances:
+        # log the event for debugging
+        print(json.dumps(event, indent=4, default=str))
 
-        instance_id = event["detail"]["requestParameters"]["responseElements"][
-            "instancesSet"
-        ]["items"][0]["instanceId"]
-        instance_ids.append(instance_id)
-    except Exception as e:
-        print(e)
-        return
+        return_msg["statusCode"] = "500"
+        return_msg["body"] = {"message": "No instances found"}
+        return return_msg
 
-    result = ec2_client.describe_instances(InstanceIds=instance_ids)
-    print(json.dumps(result, indent=4, default=str))
+    for instance in instances:
+        instance_id = instance.get("instanceId", "")
+        tags = instance.get("tagSet", {})
+
+        return_msg["statusCode"] = "200"
+        return_msg["body"] = {
+            "message": "instance found",
+            "instanceId": instance_id,
+            "tags": tags,
+        }
+        return return_msg
